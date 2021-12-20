@@ -5,7 +5,7 @@ public class Karta implements Map{
 
 	@Override
 	public void addPlace(Place place) {
-		
+		System.out.println("Hej");
 	}
 
 	@Override
