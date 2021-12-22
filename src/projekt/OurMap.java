@@ -1,15 +1,17 @@
 package projekt;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class OurMap implements Map{
 	
-	City city;
+	private Set<City> citys = new HashSet<City>();
 	int distance;
 
 	@Override
 	public void addPlace(String name) {
-		city = new City(name);
+		
 	}
 
 	@Override
@@ -26,5 +28,6 @@ public class OurMap implements Map{
 	public List<City> getAllCitysNearby() {
 		return null;
 	}
+	
 
 }

@@ -5,7 +5,7 @@ import java.util.Map;
 class City {
 	//attributes
 	String name;
-	Map<City, Integer> 
+	Map<City, Integer> map;
 	
 	int testVariabel = 0;
 	
