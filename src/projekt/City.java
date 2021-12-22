@@ -7,6 +7,8 @@ class City {
 	String name;
 	Map<City, Integer> 
 	
+	int testVariabel = 0;
+	
 	public City(String name) {
 		this.name = name;
 	}
