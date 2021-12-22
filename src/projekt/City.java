@@ -9,6 +9,8 @@ class City {
 	
 	int testVariabel = 0;
 	
+	//Testar att skriva en test-kommentar för push
+	
 	public City(String name) {
 		this.name = name;
 	}
