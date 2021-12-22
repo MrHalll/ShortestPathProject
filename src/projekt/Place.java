@@ -1,5 +1,0 @@
-package projekt;
-
-class Place {
-
-}

@@ -1,8 +1,10 @@
 package projekt;
 
+import java.util.List;
+
 public interface Map {
-	void addPlace(Place place);
-	void addPath(Place start, Place end, int length);
-	List<Place> getAllPlaces();
-	List<Place> getPlacesNearby();
+	void addPlace(String name);
+	void addBranch(City start, City end, int length);
+	List<City> getAllCitys();
+	List<City> getAllCitysNearby();
 }
