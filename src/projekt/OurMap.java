@@ -10,8 +10,8 @@ public class OurMap implements Map{
 	int distance;
 
 	@Override
-	public void addPlace(String name) {
-		
+	public void addCity(City city) {
+		citys.add(city);
 	}
 
 	@Override
@@ -28,6 +28,4 @@ public class OurMap implements Map{
 	public List<City> getAllCitysNearby() {
 		return null;
 	}
-	
-
 }
