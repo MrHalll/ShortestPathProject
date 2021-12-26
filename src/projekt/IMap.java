@@ -7,7 +7,7 @@ import java.util.List;
  *
  */
 public interface IMap {
-	void addBranch(City start, int length);
+	void addBranch(City start, City end, int weight);
 	List<City> getAllCitys();
 	List<City> getAllCitysNearby();
 }
