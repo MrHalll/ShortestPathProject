@@ -1,6 +1,6 @@
 package projekt;
 
-public class Branch {
+class Branch {
 	City start;
 	City end;
 	int distance;

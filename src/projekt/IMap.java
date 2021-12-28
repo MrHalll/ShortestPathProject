@@ -1,5 +1,6 @@
 package projekt;
 
+import java.util.Collection;
 import java.util.List;
 /**
  * 
@@ -8,6 +9,6 @@ import java.util.List;
  */
 public interface IMap {
 	void addBranch(City start, City end, int weight);
-	List<City> getAllCitys();
-	List<City> getAllCitysNearby();
+	Collection<City> getAllCitys();
+	List<Branch> getAllNeighbours(City city);
 }
