@@ -5,7 +5,6 @@ public class City {
 	//attributes
 	String name;
 	
-	
 	public City(String name) {
 		this.name = name;
 	}

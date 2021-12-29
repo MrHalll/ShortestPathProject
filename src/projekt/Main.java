@@ -1,33 +1,40 @@
 package projekt;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Collection;
+import java.util.Scanner;
+
 
 public class Main {
+	
 
 	public static void main(String[] args) {
+		City start;
+		City end;
+		int distance;
 		IMap karta = new CityMap();
-		City stockholm = new City("Stockholm");
-		City gävle = new City("Gävle");
-		City hedesunda = new City("Hedesunda");
-		City tierp = new City("Tierp");
-		City uppsala = new City("Uppsala");
-		City göteborg = new City("Göteborg");
 		
-		karta.addBranch(gävle, uppsala, 10);
-		karta.addBranch(gävle, hedesunda, 4);
-		karta.addBranch(hedesunda, tierp, 3);
-		karta.addBranch(tierp, uppsala, 4);
-		karta.addBranch(uppsala, stockholm, 8);
-		karta.addBranch(stockholm, göteborg, 40);
+		//Filinläsning
+		File inputFile = new File("C:\\Users\\melle\\OneDrive\\HIG\\AlgoritmerDatastrukturer\\Projekt\\StadsLista.txt");
+		try {
+			Scanner fileScanner = new Scanner(inputFile);
+			while (fileScanner.hasNextLine()) {
+				String line = fileScanner.nextLine();
+				Scanner lineScanner = new Scanner(line).useDelimiter(" ");
+				start = new City(lineScanner.next());
+				end = new City(lineScanner.next());
+				distance = lineScanner.nextInt();
+				karta.addBranch(start, end, distance);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		
 		Collection<City> collection = karta.getAllCitys();
-		
 		for (City city : collection) {
 			System.out.println(city.toString());
 		}
 		
-		for (Branch branch : karta.getAllNeighbours(gävle)) {
-			System.out.println(branch.toString());
-		}
 	}
 }
