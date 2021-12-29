@@ -11,8 +11,16 @@ public class Branch {
 		this.distance = distance;
 	}
 	
-	public int getDistance(City start, City end) {
+	public int getDistance() {
 		return distance;
+	}
+	
+	public City getStartCity() {
+		return start;
+	}
+	
+	public City getEndCity() {
+		return end;
 	}
 	
 	public String toString(){
