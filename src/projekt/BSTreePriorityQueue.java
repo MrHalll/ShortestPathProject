@@ -75,32 +75,32 @@ public class BSTreePriorityQueue<T extends Comparable<? super T>> implements Pri
 			throw new QueueEmptyException();
 		}
 		
-		//Om root är största värde
-		if (root.right == null) {
+		//Om root är minsta värde
+		if (root.left == null) {
 			deletedElement = root.element;
-			if (root.left == null) {
+			if (root.right == null) {
 				root = null;
 			} else {
-				root = root.left;
+				root = root.right;
 			}
 			
 			return deletedElement;
 		}
 		
-		//Hitta största värde
+		//Hitta minsta värde
 		TreeNode<T> current = root;
 		while (current != null) {
-			if (current.right.right == null) {
-				deletedElement = current.right.element;
+			if (current.left.left == null) {
+				deletedElement = current.left.element;
 				
-				if (current.right.left == null) {
-					current.right = null;
+				if (current.left.right == null) {
+					current.left = null;
 				} else {
-					current.right = current.right.left;
+					current.left = current.left.right;
 				}
 				return deletedElement;
 			}
-			current = current.right;
+			current = current.left;
 		}
 		return null;
 	}
