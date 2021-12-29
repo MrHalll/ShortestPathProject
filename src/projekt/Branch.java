@@ -1,6 +1,6 @@
 package projekt;
 
-class Branch {
+public class Branch {
 	City start;
 	City end;
 	int distance;
@@ -11,4 +11,11 @@ class Branch {
 		this.distance = distance;
 	}
 	
+	public int getDistance(City start, City end) {
+		return distance;
+	}
+	
+	public String toString(){
+		return start + "->" + end + " : " + distance;
+	}
 }

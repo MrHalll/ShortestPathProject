@@ -1,7 +1,7 @@
 package projekt;
 
 
-class City {
+public class City {
 	//attributes
 	String name;
 	
