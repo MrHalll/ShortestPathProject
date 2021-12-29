@@ -10,4 +10,5 @@ class Branch {
 		this.end = end;
 		this.distance = distance;
 	}
+	
 }

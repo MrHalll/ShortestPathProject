@@ -22,8 +22,7 @@ public class Main {
 		}
 	}
 	
-	public static void djikstra(CityMap cityMap, City start) {
+	public void djikstra(CityMap cityMap, int[] dist) {
 		
 	}
-
 }
