@@ -10,6 +10,7 @@ public class Djikstra {
 	private static Map<City, City> predMap = new HashMap<City, City>();
 	private static PriorityQueue<City> pq = new PriorityQueue<City>();
 	
+	int testAttribut = 0;
 	
 	public static Map calculateShortestPath(CityMap map, City startCity) {
 		for (City city : map.getAllCitys()) {
