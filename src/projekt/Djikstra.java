@@ -9,16 +9,14 @@ import javax.management.RuntimeErrorException;
 
 public class Djikstra {
 	
-	private static Map<City, Integer> distanceMap = new HashMap<City, Integer>();
-	private static Map<City, City> predMap = new HashMap<City, City>();
-	private static PriorityQueue<City> pq = new PriorityQueue<City>();
-	
-	int testAttribut = 0;
-	
-	public static Map<City, Integer> calculateShortestPath(CityMap map, City startCity) {
-		distanceMap.clear();
-		predMap.clear();
-		pq.clear();
+	private static Map<City, Integer> distanceMap;
+	private static Map<City, City> predMap;
+	private static PriorityQueue<City> pq;
+		
+	public static Map<City, Integer> calculateShortestPath(IMap map, City startCity) {
+		distanceMap = new HashMap<City, Integer>();
+		predMap = new HashMap<City, City>();
+		pq = new PriorityQueue<City>();
 		for (City city : map.getAllCitys()) {
 			predMap.putIfAbsent(city, null);
 
@@ -33,17 +31,8 @@ public class Djikstra {
 		while (!pq.isEmpty()) {
 			City currentCity = pq.poll();
 			for (Branch branch : map.getAllNeighbours(currentCity)) {
-				
 				//Temp lösning för att få neighbourCity att peka på rätt objekt
 				City neighbourCity = map.getCity(branch.getEndCity().toString());
-				
-				/*
-				//**Felsökning**
-				System.out.println("Current: " + currentCity.toString() + " with ID: " + currentCity.hashCode() + ": " + distanceMap.get(currentCity));
-				System.out.println("Neighbour: " + neighbourCity.toString() + " with ID: " + neighbourCity.hashCode() + ": " + distanceMap.get(neighbourCity));
-				System.out.println(pq);
-				System.out.println(); */
-
 				if (distanceMap.get(neighbourCity).compareTo(distanceMap.get(currentCity) + branch.getDistance()) > 0) {
 					distanceMap.replace(neighbourCity, (distanceMap.get(currentCity) + branch.getDistance()));
 					predMap.replace(neighbourCity, currentCity);
@@ -52,12 +41,11 @@ public class Djikstra {
 					pq.add(neighbourCity);
 				}
 			}
-
 		}		
 		return distanceMap;
 	}
 	
-	public static String getShortestPath(CityMap map, City startCity, City endCity) throws RuntimeErrorException{
+	public static String getShortestPath(IMap map, City startCity, City endCity) throws RuntimeErrorException{
 		String shortestPath = new String();
 		Stack<City> cityStack = new Stack<City>();
 		if (!map.contains(startCity) || !map.contains(endCity)) {
@@ -76,7 +64,6 @@ public class Djikstra {
 		while (!cityStack.isEmpty()) {
 			shortestPath += cityStack.pop().toString() + " -> ";
 		}
-		
 		shortestPath += endCity.toString();
 		return shortestPath;
 	}

@@ -2,22 +2,20 @@ package projekt;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Collection;
 import java.util.Map;
 import java.util.Scanner;
 
 
 public class Main {
-	
 
 	public static void main(String[] args) {
 		City start;
 		City end;
 		int distance;
-		CityMap karta = new CityMap();
+		IMap karta = new CityMap();
 		
 		//Filinläsning
-		File inputFile = new File("C:\\Users\\OskarLaptop\\Documents\\Högskola\\2021\\Algoritmer och datastrukturer\\Projekt\\Stadsfil1.txt");
+		File inputFile = new File("C:\\Users\\melle\\OneDrive\\HIG\\AlgoritmerDatastrukturer\\Projekt\\StadsLista.txt");
 		try {
 			Scanner fileScanner = new Scanner(inputFile);
 			while (fileScanner.hasNextLine()) {
@@ -27,24 +25,19 @@ public class Main {
 				end = new City(lineScanner.next());
 				distance = lineScanner.nextInt();
 				karta.addBranch(start, end, distance);
+				lineScanner.close();
 			}
+			fileScanner.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		
-		/*Collection<City> collection = karta.getAllCitys();
-		for (City city : collection) {
-			System.out.println(city.toString());
+		Map<City, Integer> distanceMap = Djikstra.calculateShortestPath(karta, karta.getCity("Stockholm"));
+		System.out.println("Shortest distance from every city to Stockholm");
+		for (Object object : distanceMap.keySet()) {
+			System.out.println(object.toString() + " " + distanceMap.get(object).toString());
 		}
-		*/
-		
-		Map<City, Integer> distances = Djikstra.calculateShortestPath(karta, karta.getCity("Stockholm"));
-		for (Object Object : distances.keySet()) {
-			System.out.println(Object.toString() + " " + distances.get(Object).toString());
-		}
-		
-		System.out.println(Djikstra.getShortestPath(karta, karta.getCity("Hudiksvall"), karta.getCity("Örebro")));
-		
-		
+		System.out.println("Shortest path and distance between two citys:");
+		System.out.println(Djikstra.getShortestPath(karta, karta.getCity("Gävle"), karta.getCity("Stockholm")));
 	}
 }

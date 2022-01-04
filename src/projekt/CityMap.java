@@ -39,10 +39,12 @@ public class CityMap implements IMap{
 		return neighbours.get(city);
 	}
 	
+	@Override
 	public City getCity(String cityName) {
 		return citys.get(cityName);
 	}
 	
+	@Override
 	public boolean contains(City city) {
 		if (citys.containsKey(city.toString())) {
 			return true;

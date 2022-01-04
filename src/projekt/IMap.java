@@ -11,4 +11,6 @@ public interface IMap {
 	void addBranch(City start, City end, int distance);
 	Collection<City> getAllCitys();
 	List<Branch> getAllNeighbours(City city);
+	boolean contains(City city);
+	City getCity(String cityName);
 }
