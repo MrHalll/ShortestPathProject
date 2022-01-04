@@ -43,6 +43,8 @@ public class Main {
 			System.out.println(Object.toString() + " " + distances.get(Object).toString());
 		}
 		
+		System.out.println(Djikstra.getShortestPath(karta, karta.getCity("Hudiksvall"), karta.getCity("Örebro")));
+		
 		
 	}
 }

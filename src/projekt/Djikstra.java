@@ -3,6 +3,9 @@ package projekt;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Stack;
+
+import javax.management.RuntimeErrorException;
 
 public class Djikstra {
 	
@@ -13,6 +16,9 @@ public class Djikstra {
 	int testAttribut = 0;
 	
 	public static Map<City, Integer> calculateShortestPath(CityMap map, City startCity) {
+		distanceMap.clear();
+		predMap.clear();
+		pq.clear();
 		for (City city : map.getAllCitys()) {
 			predMap.putIfAbsent(city, null);
 
@@ -48,8 +54,31 @@ public class Djikstra {
 			}
 
 		}		
-		System.out.println(predMap);
 		return distanceMap;
+	}
+	
+	public static String getShortestPath(CityMap map, City startCity, City endCity) throws RuntimeErrorException{
+		String shortestPath = new String();
+		Stack<City> cityStack = new Stack<City>();
+		if (!map.contains(startCity) || !map.contains(endCity)) {
+			throw new RuntimeErrorException(null, "Cities specified do not exist in CityMap");
+		}
+		Map<City, Integer> distances = calculateShortestPath(map, map.getCity(startCity.toString()));
+		shortestPath = "Distance: " + distances.get(map.getCity(endCity.toString())) + " km" + "\nPath: " + startCity.toString() + " -> ";
+		
+		City currentCity = map.getCity(endCity.toString());
+		while (predMap.get(currentCity) != null && predMap.get(currentCity) != map.getCity(startCity.toString())) {
+			cityStack.push(predMap.get(currentCity));
+			currentCity = predMap.get(currentCity);
+		}
+		
+		//Stacken används så att städerna hamnar i rätt ordning i pathen
+		while (!cityStack.isEmpty()) {
+			shortestPath += cityStack.pop().toString() + " -> ";
+		}
+		
+		shortestPath += endCity.toString();
+		return shortestPath;
 	}
 	
 

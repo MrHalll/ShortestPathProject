@@ -42,4 +42,11 @@ public class CityMap implements IMap{
 	public City getCity(String cityName) {
 		return citys.get(cityName);
 	}
+	
+	public boolean contains(City city) {
+		if (citys.containsKey(city.toString())) {
+			return true;
+		}
+		return false;
+	}
 }
