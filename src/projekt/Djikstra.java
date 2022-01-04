@@ -12,7 +12,7 @@ public class Djikstra {
 	
 	int testAttribut = 0;
 	
-	public static Map calculateShortestPath(CityMap map, City startCity) {
+	public static Map<City, Integer> calculateShortestPath(CityMap map, City startCity) {
 		for (City city : map.getAllCitys()) {
 			predMap.putIfAbsent(city, null);
 
@@ -28,13 +28,13 @@ public class Djikstra {
 			City currentCity = pq.poll();
 			for (Branch branch : map.getAllNeighbours(currentCity)) {
 				City neighbourCity = branch.getEndCity();
-				if (distanceMap.get(neighbourCity).compareTo(distanceMap.get(currentCity) + branch.getDistance()) > 0) {
-					distanceMap.replace(neighbourCity, (distanceMap.get(currentCity) + branch.getDistance()));
-					predMap.replace(neighbourCity, currentCity);
-					pq.remove(neighbourCity);
-					neighbourCity.setWeight(distanceMap.get(currentCity) + branch.getDistance());
-					pq.add(neighbourCity);
-				}
+					if (distanceMap.get(neighbourCity).compareTo(distanceMap.get(currentCity) + branch.getDistance()) > 0) {
+						distanceMap.replace(neighbourCity, (distanceMap.get(currentCity) + branch.getDistance()));
+						predMap.replace(neighbourCity, currentCity);
+						pq.remove(neighbourCity);
+						neighbourCity.setWeight(distanceMap.get(currentCity) + branch.getDistance());
+						pq.add(neighbourCity);
+					}
 			}
 			
 		}		

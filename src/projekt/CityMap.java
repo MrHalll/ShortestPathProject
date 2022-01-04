@@ -20,13 +20,13 @@ public class CityMap implements IMap{
 	public void addBranch(City start, City end, int distance) {
 		addCity(start);
 		addCity(end);
-		neighbours.get(start).add(new Branch(start, end, distance));
-		neighbours.get(end).add(new Branch(end, start, distance));
+		neighbours.get(getCity(start.toString())).add(new Branch(start, end, distance));
+		neighbours.get(getCity(end.toString())).add(new Branch(end, start, distance));
 	}
 	
 	private void addCity(City city){
 		citys.putIfAbsent(city.toString(), city);
-		neighbours.putIfAbsent(city, new ArrayList<Branch>());
+		neighbours.putIfAbsent(getCity(city.toString()), new ArrayList<Branch>());
 	}
 
 	@Override
@@ -37,5 +37,9 @@ public class CityMap implements IMap{
 	@Override
 	public List<Branch> getAllNeighbours(City city) {
 		return neighbours.get(city);
+	}
+	
+	public City getCity(String cityName) {
+		return citys.get(cityName);
 	}
 }

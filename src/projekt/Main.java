@@ -3,6 +3,7 @@ package projekt;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Scanner;
 
 
@@ -13,10 +14,10 @@ public class Main {
 		City start;
 		City end;
 		int distance;
-		IMap karta = new CityMap();
+		CityMap karta = new CityMap();
 		
 		//Filinläsning
-		File inputFile = new File("C:\\Users\\melle\\OneDrive\\HIG\\AlgoritmerDatastrukturer\\Projekt\\StadsLista.txt");
+		File inputFile = new File("C:\\Users\\OskarLaptop\\Documents\\Högskola\\2021\\Algoritmer och datastrukturer\\Projekt\\Stadsfil1.txt");
 		try {
 			Scanner fileScanner = new Scanner(inputFile);
 			while (fileScanner.hasNextLine()) {
@@ -35,6 +36,12 @@ public class Main {
 		for (City city : collection) {
 			System.out.println(city.toString());
 		}
+		
+		Map<City, Integer> distances = Djikstra.calculateShortestPath(karta, karta.getCity("Gävle"));
+		for (Object Object : distances.keySet()) {
+			System.out.println(Object.toString() + " " + distances.get(Object).toString());
+		}
+		
 		
 	}
 }
