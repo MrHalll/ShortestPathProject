@@ -32,12 +32,13 @@ public class Main {
 			e.printStackTrace();
 		}
 		
-		Collection<City> collection = karta.getAllCitys();
+		/*Collection<City> collection = karta.getAllCitys();
 		for (City city : collection) {
 			System.out.println(city.toString());
 		}
+		*/
 		
-		Map<City, Integer> distances = Djikstra.calculateShortestPath(karta, karta.getCity("Gävle"));
+		Map<City, Integer> distances = Djikstra.calculateShortestPath(karta, karta.getCity("Stockholm"));
 		for (Object Object : distances.keySet()) {
 			System.out.println(Object.toString() + " " + distances.get(Object).toString());
 		}

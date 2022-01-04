@@ -56,7 +56,10 @@ class CityMapTest {
 	@DisplayName("Testa Neighbours")
 	void testGetAllNeighbours() {
 		for (City city : cityMap.getAllCitys()) {
-			System.out.println(cityMap.getAllNeighbours(city));
+			System.out.println();
+			for (Branch neighbour : cityMap.getAllNeighbours(city)) {
+				System.out.println(city.toString() + " with ID: " + city.hashCode() + " -> " + neighbour.getEndCity() + " with ID: " + neighbour.hashCode());
+			}
 		}
 	}
 

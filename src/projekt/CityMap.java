@@ -26,7 +26,7 @@ public class CityMap implements IMap{
 	
 	private void addCity(City city){
 		citys.putIfAbsent(city.toString(), city);
-		neighbours.putIfAbsent(getCity(city.toString()), new ArrayList<Branch>());
+		neighbours.putIfAbsent(citys.get(city.toString()), new ArrayList<Branch>());
 	}
 
 	@Override
