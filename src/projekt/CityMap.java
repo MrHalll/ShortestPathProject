@@ -40,8 +40,8 @@ public class CityMap implements IMap{
 	}
 	
 	@Override
-	public City getCity(String cityName) {
-		return citys.get(cityName);
+	public City getCity(String name) {
+		return citys.get(name);
 	}
 	
 	@Override
