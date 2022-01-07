@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-
 public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 903966514116353163L;
@@ -44,20 +43,19 @@ public class MainFrame extends JFrame {
 		JPanel inputPanel = new JPanel(new GridLayout(1, 3));
 		inputPanel.setSize(400, 150);
 		add(inputPanel, BorderLayout.CENTER);
-		startCityTF = new JTextField("Enter start city");
-		endCityTF = new JTextField("Enter end city");
+		startCityTF = new JTextField();
+		endCityTF = new JTextField();
 		startButton = new JButton("Start");
 		inputPanel.add(startCityTF);
 		inputPanel.add(endCityTF);
 		inputPanel.add(startButton);
-		startCityInput = startCityTF.getText();
-		endCityInput = endCityTF.getText();
 		startButton.addActionListener(e -> checkInput());
 		
 		JPanel resultPanel = new JPanel(new BorderLayout());
 		resultPanel.setSize(400, 150);
 		add(resultPanel, BorderLayout.SOUTH);
-		resultArea = new JTextArea();
+		resultArea = new JTextArea("Här kommmer resultatet");
+		resultPanel.add(resultArea);
 	}
 
 	private void readFile() {
@@ -89,11 +87,10 @@ public class MainFrame extends JFrame {
 	}
 
 	private void checkInput() {
-		if (endCityInput == null) {
-			Djikstra.calculateShortestPath(karta, karta.getCity(startCityInput));
-		}
-		String reult = Djikstra.getShortestPath(karta, karta.getCity(startCityInput), karta.getCity(endCityInput));
-		System.out.println(reult);
+		startCityInput = startCityTF.getText();
+		endCityInput = endCityTF.getText();
+		String result = Djikstra.getShortestPath(karta, karta.getCity(startCityInput), karta.getCity(endCityInput));
+		resultArea.setText(result);
 	}	
 
 }
