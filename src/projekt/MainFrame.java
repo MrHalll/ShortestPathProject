@@ -9,6 +9,7 @@ import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -89,8 +90,17 @@ public class MainFrame extends JFrame {
 	private void checkInput() {
 		startCityInput = startCityTF.getText();
 		endCityInput = endCityTF.getText();
-		String result = Djikstra.getShortestPath(karta, karta.getCity(startCityInput), karta.getCity(endCityInput));
-		resultArea.setText(result);
+		try {
+			String result = Djikstra.getShortestPath(karta, karta.getCity(startCityInput), karta.getCity(endCityInput));
+			resultArea.setText(result);
+		} catch (NullPointerException e) {
+			JOptionPane.showMessageDialog(null,
+					"Cities doesn't exist in city map",
+					"Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
+		
+		
 	}	
 
 }
