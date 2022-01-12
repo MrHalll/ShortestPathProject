@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Map;
 import java.util.Scanner;
 
 import javax.swing.JButton;
@@ -29,33 +30,29 @@ public class MainFrame extends JFrame {
 	
 	public MainFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(400, 300);
+		setSize(500, 300);
 		setVisible(true);
 		setLayout(new BorderLayout());
 		setTitle("Shortest Path Program");
 		
-		JPanel chooseFilePanel = new JPanel(new GridLayout(1, 1));
-		chooseFilePanel.setSize(400, 100);
-		add(chooseFilePanel, BorderLayout.NORTH);
+		//JPanel för att välja fil och skriva in start och slutstad
+		JPanel inputPanel = new JPanel(new GridLayout(1, 4));
+		add(inputPanel, BorderLayout.NORTH);
 		chooseFileButton = new JButton("Choose file");
-		chooseFilePanel.add(chooseFileButton);
-		chooseFileButton.addActionListener(e -> readFile());
-		
-		JPanel inputPanel = new JPanel(new GridLayout(1, 3));
-		inputPanel.setSize(400, 150);
-		add(inputPanel, BorderLayout.CENTER);
-		startCityTF = new JTextField();
-		endCityTF = new JTextField();
+		startCityTF = new JTextField("Start city");
+		endCityTF = new JTextField("End city");
 		startButton = new JButton("Start");
 		inputPanel.add(startCityTF);
 		inputPanel.add(endCityTF);
+		inputPanel.add(chooseFileButton);
 		inputPanel.add(startButton);
+		chooseFileButton.addActionListener(e -> readFile());
 		startButton.addActionListener(e -> checkInput());
 		
+		//JPanel där resultatet kommer at visas
 		JPanel resultPanel = new JPanel(new BorderLayout());
-		resultPanel.setSize(400, 150);
-		add(resultPanel, BorderLayout.SOUTH);
-		resultArea = new JTextArea("Här kommmer resultatet");
+		add(resultPanel, BorderLayout.CENTER);
+		resultArea = new JTextArea("Result: ");
 		resultPanel.add(resultArea);
 	}
 
@@ -67,7 +64,6 @@ public class MainFrame extends JFrame {
 		fileChooser = new JFileChooser();
 		int userResponse = fileChooser.showOpenDialog(null);
 		if (userResponse == JFileChooser.APPROVE_OPTION) {
-			//File inputFile = new File("C:\\Users\\melle\\OneDrive\\HIG\\AlgoritmerDatastrukturer\\Projekt\\StadsLista.txt");
 			File inputFile = fileChooser.getSelectedFile();
 			try {
 				Scanner fileScanner = new Scanner(inputFile);
@@ -90,17 +86,21 @@ public class MainFrame extends JFrame {
 	private void checkInput() {
 		startCityInput = startCityTF.getText();
 		endCityInput = endCityTF.getText();
+		String result = "";
 		try {
-			String result = Djikstra.getShortestPath(karta, karta.getCity(startCityInput), karta.getCity(endCityInput));
-			resultArea.setText(result);
+			if (endCityInput.equals("End city")) {
+				Map<City, Integer> distanceMap = Djikstra.calculateShortestPath(karta, karta.getCity(startCityInput));
+				for (City city : distanceMap.keySet()) {
+					result += city.toString() + ": " + distanceMap.get(city).toString() + " km" + "\n";
+				}
+				resultArea.setText(result);
+			}else {
+				result = Djikstra.getShortestPath(karta, karta.getCity(startCityInput), karta.getCity(endCityInput));
+				resultArea.setText(result);
+			}
 		} catch (NullPointerException e) {
-			JOptionPane.showMessageDialog(null,
-					"Cities doesn't exist in city map",
-					"Error",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Cities doesn't exist in city map", "Error", JOptionPane.ERROR_MESSAGE);
 		}
-		
-		
 	}	
 
 }
