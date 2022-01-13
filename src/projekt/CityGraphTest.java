@@ -11,18 +11,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class CityMapTest {
-	
-	CityMap cityMap;
+class CityGraphTest {
+
+	CityGraph cityGraph;
 	City start;
 	City end;
 	int distance;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		cityMap = new CityMap();
+		cityGraph = new CityGraph();
 
-		//Filinläsning
+		// Filinläsning
 		File inputFile = new File("C:\\Users\\melle\\OneDrive\\HIG\\AlgoritmerDatastrukturer\\Projekt\\StadsLista.txt");
 		Scanner fileScanner = new Scanner(inputFile);
 		while (fileScanner.hasNextLine()) {
@@ -31,34 +31,35 @@ class CityMapTest {
 			start = new City(lineScanner.next());
 			end = new City(lineScanner.next());
 			distance = lineScanner.nextInt();
-			cityMap.addBranch(start, end, distance);
+			cityGraph.addBranch(start, end, distance);
 		}
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		cityMap = null;
+		cityGraph = null;
 		start = null;
 		end = null;
 		distance = 0;
 	}
 
 	@Test
-	@DisplayName("Testa ny CityMap")
+	@DisplayName("Testa CityGraph")
 	void testNewCityMap() {
-		assertNotNull(cityMap);
-		for (City city : cityMap.getAllCitys()) {
+		assertNotNull(cityGraph);
+		for (City city : cityGraph.getAllCitys()) {
 			System.out.println(city);
 		}
 	}
-	
+
 	@Test
 	@DisplayName("Testa Neighbours")
 	void testGetAllNeighbours() {
-		for (City city : cityMap.getAllCitys()) {
+		for (City city : cityGraph.getAllCitys()) {
 			System.out.println();
-			for (Branch neighbour : cityMap.getAllNeighbours(city)) {
-				System.out.println(city.toString() + " with ID: " + city.hashCode() + " -> " + neighbour.getEndCity() + " with ID: " + neighbour.hashCode());
+			for (Branch neighbour : cityGraph.getAllNeighbours(city)) {
+				System.out.println(city.toString() + " with ID: " + city.hashCode() + " -> " + neighbour.getEndCity()
+						+ " with ID: " + neighbour.hashCode());
 			}
 		}
 	}

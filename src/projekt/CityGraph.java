@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class CityMap implements IMap{
+public class CityGraph implements Graph{
 	
 	private Map<String, City> citys = new HashMap<String, City>();
 	private Map<City, ArrayList<Branch>> neighbours = new HashMap<City, ArrayList<Branch>>();

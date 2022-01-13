@@ -12,7 +12,7 @@ public class Main {
 		City start;
 		City end;
 		int distance;
-		IMap karta = new CityMap();
+		Graph karta = new CityGraph();
 		
 		//Filinläsning
 		File inputFile = new File("C:\\Users\\melle\\OneDrive\\HIG\\AlgoritmerDatastrukturer\\Projekt\\StadsLista.txt");

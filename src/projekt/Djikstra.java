@@ -13,10 +13,11 @@ public class Djikstra {
 	private static Map<City, City> predMap;
 	private static PriorityQueue<City> pq;
 		
-	public static Map<City, Integer> calculateShortestPath(IMap map, City startCity) {
+	public static Map<City, Integer> calculateShortestPath(Graph map, City startCity) {
 		distanceMap = new HashMap<City, Integer>();
 		predMap = new HashMap<City, City>();
 		pq = new PriorityQueue<City>();
+		
 		for (City city : map.getAllCitys()) {
 			predMap.putIfAbsent(city, null);
 
@@ -45,7 +46,7 @@ public class Djikstra {
 		return distanceMap;
 	}
 	
-	public static String getShortestPath(IMap map, City startCity, City endCity) throws RuntimeErrorException{
+	public static String getShortestPath(Graph map, City startCity, City endCity) throws RuntimeErrorException{
 		String shortestPath = new String();
 		Stack<City> cityStack = new Stack<City>();
 		if (!map.contains(startCity) || !map.contains(endCity)) {

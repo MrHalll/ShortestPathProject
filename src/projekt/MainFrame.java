@@ -26,7 +26,7 @@ public class MainFrame extends JFrame {
 	JButton startButton;
 	JButton chooseFileButton;
 	JFileChooser fileChooser;
-	IMap karta;
+	Graph karta;
 	
 	public MainFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,7 +61,7 @@ public class MainFrame extends JFrame {
 		City start;
 		City end;
 		int distance;
-		karta = new CityMap();
+		karta = new CityGraph();
 		fileChooser = new JFileChooser();
 		int userResponse = fileChooser.showOpenDialog(null);
 		if (userResponse == JFileChooser.APPROVE_OPTION) {
