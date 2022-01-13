@@ -23,7 +23,7 @@ class CityMapTest {
 		cityMap = new CityMap();
 
 		//Filinläsning
-		File inputFile = new File("C:\\Users\\OskarLaptop\\Documents\\Högskola\\2021\\Algoritmer och datastrukturer\\Projekt\\Stadsfil1.txt");
+		File inputFile = new File("C:\\Users\\melle\\OneDrive\\HIG\\AlgoritmerDatastrukturer\\Projekt\\StadsLista.txt");
 		Scanner fileScanner = new Scanner(inputFile);
 		while (fileScanner.hasNextLine()) {
 			String line = fileScanner.nextLine();

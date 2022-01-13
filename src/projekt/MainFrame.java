@@ -90,7 +90,7 @@ public class MainFrame extends JFrame {
 		String result = "";
 		try {
 			//Om ingen slutstad har valts så skriver den ut kortaste avstånd till alla städer
-			if (endCityInput.equals("") && endCityInput.equals("End city")) {
+			if (endCityInput.equals("") || endCityInput.equals("End city")) {
 				Map<City, Integer> distanceMap = Djikstra.calculateShortestPath(karta, karta.getCity(startCityInput));
 				for (City city : distanceMap.keySet()) {
 					result += city.toString() + ": " + distanceMap.get(city).toString() + "\n";
