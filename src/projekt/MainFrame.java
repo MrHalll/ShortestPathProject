@@ -52,7 +52,8 @@ public class MainFrame extends JFrame {
 		//JPanel där resultatet kommer at visas
 		JPanel resultPanel = new JPanel(new BorderLayout());
 		add(resultPanel, BorderLayout.CENTER);
-		resultArea = new JTextArea("Result: ");
+		resultArea = new JTextArea("How it works: " + "\n" + "Enter start and end city to get the shortest path between those two citys"
+		+ "\n" + "Leave 'end city' blank and you will get the shortest distance from all other citys to this city");
 		resultPanel.add(resultArea);
 	}
 
@@ -88,10 +89,11 @@ public class MainFrame extends JFrame {
 		endCityInput = endCityTF.getText();
 		String result = "";
 		try {
-			if (endCityInput.equals("End city")) {
+			//Om ingen slutstad har valts så skriver den ut kortaste avstånd till alla städer
+			if (endCityInput.equals("") && endCityInput.equals("End city")) {
 				Map<City, Integer> distanceMap = Djikstra.calculateShortestPath(karta, karta.getCity(startCityInput));
 				for (City city : distanceMap.keySet()) {
-					result += city.toString() + ": " + distanceMap.get(city).toString() + " km" + "\n";
+					result += city.toString() + ": " + distanceMap.get(city).toString() + "\n";
 				}
 				resultArea.setText(result);
 			}else {
