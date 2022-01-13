@@ -12,10 +12,6 @@ public class CityMap implements IMap{
 	private Map<String, City> citys = new HashMap<String, City>();
 	private Map<City, ArrayList<Branch>> neighbours = new HashMap<City, ArrayList<Branch>>();
 	
-	public CityMap(){
-		
-	}
-	
 	@Override
 	public void addBranch(City start, City end, int distance) {
 		addCity(start);
