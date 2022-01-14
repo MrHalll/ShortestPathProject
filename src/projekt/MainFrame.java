@@ -27,15 +27,15 @@ public class MainFrame extends JFrame {
 	JButton chooseFileButton;
 	JFileChooser fileChooser;
 	Graph karta;
-	
+
 	public MainFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 300);
 		setVisible(true);
 		setLayout(new BorderLayout());
 		setTitle("Shortest Path Program");
-		
-		//JPanel för att välja fil och skriva in start och slutstad
+
+		// JPanel för att välja fil och skriva in start och slutstad
 		JPanel inputPanel = new JPanel(new GridLayout(1, 4));
 		add(inputPanel, BorderLayout.NORTH);
 		chooseFileButton = new JButton("Choose file");
@@ -48,12 +48,13 @@ public class MainFrame extends JFrame {
 		inputPanel.add(startButton);
 		chooseFileButton.addActionListener(e -> readFile());
 		startButton.addActionListener(e -> checkInput());
-		
-		//JPanel där resultatet kommer at visas
+
+		// JPanel där resultatet kommer at visas
 		JPanel resultPanel = new JPanel(new BorderLayout());
 		add(resultPanel, BorderLayout.CENTER);
-		resultArea = new JTextArea("How it works: " + "\n" + "Enter start and end city to get the shortest path between those two citys"
-		+ "\n" + "Leave 'end city' blank and you will get the shortest distance from all other citys to this city");
+		resultArea = new JTextArea("How it works: " + "\n"
+				+ "Enter start and end city to get the shortest path between those two citys" + "\n"
+				+ "Leave 'end city' blank and you will get the shortest distance from all other citys to this city");
 		resultPanel.add(resultArea);
 	}
 
@@ -79,7 +80,7 @@ public class MainFrame extends JFrame {
 				}
 				fileScanner.close();
 			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Try another file", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
@@ -89,20 +90,21 @@ public class MainFrame extends JFrame {
 		endCityInput = endCityTF.getText();
 		String result = "";
 		try {
-			//Om ingen slutstad har valts så skriver den ut kortaste avstånd till alla städer
+			// Om ingen slutstad har valts så skrivs det ut kortaste avstånd till alla
+			// städer
 			if (endCityInput.equals("") || endCityInput.equals("End city")) {
 				Map<City, Integer> distanceMap = Djikstra.calculateShortestPath(karta, karta.getCity(startCityInput));
 				for (City city : distanceMap.keySet()) {
 					result += city.toString() + ": " + distanceMap.get(city).toString() + "\n";
 				}
 				resultArea.setText(result);
-			}else {
+			} else {
 				result = Djikstra.getShortestPath(karta, karta.getCity(startCityInput), karta.getCity(endCityInput));
 				resultArea.setText(result);
 			}
 		} catch (NullPointerException e) {
 			JOptionPane.showMessageDialog(null, "Cities doesn't exist in city map", "Error", JOptionPane.ERROR_MESSAGE);
 		}
-	}	
+	}
 
 }

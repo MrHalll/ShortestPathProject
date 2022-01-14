@@ -32,7 +32,6 @@ public class Djikstra {
 		while (!pq.isEmpty()) {
 			City currentCity = pq.poll();
 			for (Branch branch : map.getAllNeighbours(currentCity)) {
-				//Temp lösning för att få neighbourCity att peka på rätt objekt
 				City neighbourCity = map.getCity(branch.getEndCity().toString());
 				if (distanceMap.get(neighbourCity).compareTo(distanceMap.get(currentCity) + branch.getDistance()) > 0) {
 					distanceMap.replace(neighbourCity, (distanceMap.get(currentCity) + branch.getDistance()));
@@ -42,7 +41,7 @@ public class Djikstra {
 					pq.add(neighbourCity);
 				}
 			}
-		}		
+		}
 		return distanceMap;
 	}
 	
@@ -53,7 +52,7 @@ public class Djikstra {
 			throw new RuntimeErrorException(null, "Cities specified do not exist in CityMap");
 		}
 		Map<City, Integer> distances = calculateShortestPath(map, map.getCity(startCity.toString()));
-		shortestPath = "Distance: " + distances.get(map.getCity(endCity.toString())) + " km" + "\nPath: " + startCity.toString() + " -> ";
+		shortestPath = "Shortest Path: " + startCity.toString() + " -> ";
 		
 		City currentCity = map.getCity(endCity.toString());
 		while (predMap.get(currentCity) != null && predMap.get(currentCity) != map.getCity(startCity.toString())) {
@@ -61,11 +60,12 @@ public class Djikstra {
 			currentCity = predMap.get(currentCity);
 		}
 		
-		//Stacken används så att städerna hamnar i rätt ordning i pathen
+		//Stacken används så att städerna hamnar i rätt ordning när pathen ska skrivas ut
 		while (!cityStack.isEmpty()) {
 			shortestPath += cityStack.pop().toString() + " -> ";
 		}
 		shortestPath += endCity.toString();
+		shortestPath += "\nDistance: " + distances.get(map.getCity(endCity.toString())) + " mil";
 		return shortestPath;
 	}
 	
