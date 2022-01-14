@@ -5,7 +5,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-
+/**
+ * Our implementation of the Abstract Data type Graph
+ * 
+ * @author Melvin Hall
+ * @author Oskar Persson
+ * @version 2022-01-13
+ */
 
 public class CityGraph implements Graph{
 	
